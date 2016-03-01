@@ -1,11 +1,18 @@
     require File.expand_path('../boot', __FILE__)
 
     # Pick the frameworks you want:
-    require "active_record/railtie"
-    require "action_controller/railtie"
-    require "action_mailer/railtie"
-    require "sprockets/railtie"
-    # require "rails/test_unit/railtie"
+    require "rails"
+
+    %w(
+      action_controller/railtie
+      action_view/railtie
+      action_mailer/railtie
+      rails/test_unit/railtie
+      sprockets/railtie
+      active_model/railtie
+    ).each do |railtie|
+      require railtie.to_s
+    end
 
     # Assets should be precompiled for production (so we don't need the gems loaded then)
     Bundler.require(*Rails.groups(assets: %w(development test)))
